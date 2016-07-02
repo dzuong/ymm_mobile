@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
 
 const Main = React.createClass({
+	propTypes: {
+		children: PropTypes.element.isRequired
+	},
 	
 	render() {
 		return (
 			<div>
-				 {React.cloneElement(this.props.children, {...this.props, key: undefined, ref: undefined })}
+				{this.props.children}
 			</div>
 		);
 	}

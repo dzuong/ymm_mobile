@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import css
-//import react router deps
-import { Router } from 'react-router';
-//https://github.com/reactjs/react-redux/blob/master/docs/api.md
-//<Provider store>Makes the Redux store available to the connect() calls in the component hierarchy below. Normally, you can’t use connect() without wrapping the root component in <Provider>.
 import { Provider } from 'react-redux';
-import store, { history } from './stores/configureStore';
+import { Router, browserHistory } from 'react-router';
 import routes from './routes';
+import configureStore from './stores/configureStore.js';
+
+const store = configureStore();
 
 ReactDOM.render(
-	<Provider store={store}>
-		<Router history={history}  routes={routes} />
-	</Provider>,
-	document.getElementById('root')
-);
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+  , document.getElementById('root'));

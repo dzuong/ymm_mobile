@@ -1,4 +1,9 @@
 import React, { PropTypes } from 'react';
+import FacebookLogin from './facebook/facebook';
+
+const responseFacebook = (response) => {
+	console.log('facebook response',response);
+};
 
 const Home = React.createClass({
 
@@ -10,17 +15,20 @@ const Home = React.createClass({
 	},
 	render() {
 		return (
-
-    <div className="container">
-			<div className="jumbotron">
-		        <h1>'Allo, 'Allo!</h1>
-		        <p className="lead">Always a pleasure scaffolding your apps.</p>
-		        <p><a className="btn btn-lg btn-success" href="#"><i className="fa fa-facebook-square"></i> Facebook login</a></p>
-		      </div>
-
-    </div>	
+			<div className="container">
+				<div className="jumbotron">
+					<h1>'Allo, 'Allo!</h1>
+					<p className="lead">Always a pleasure scaffolding your apps.</p>
+					<FacebookLogin
+						appId="532016516944140"
+						autoLoad={true}
+						callback={responseFacebook}
+						icon="fa-facebook" 
+						{...this.props}
+					/>
+				</div>
+			</div>	
 		);
 	}
 });
-
 export default Home;

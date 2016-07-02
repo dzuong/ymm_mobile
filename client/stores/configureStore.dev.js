@@ -1,31 +1,23 @@
-//createStore(reducer, [initialState], [enhancer])
-////http://redux.js.org/docs/api/createStore.html
 import { createStore, applyMiddleware, compose } from 'redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import {browserHistory} from 'react-router';
 import promise from 'redux-promise';
+import reducer from '../reducers';
 
 
-//import the root reducer
-//Actions describe the fact that something happened, but don’t specify how the application’s state changes in response. This is the job of a reducer.
-import rootReducer from '../reducers/index';
-// import posts from '../data/posts';
+export default function configureStore(initialState) {
+  const finalCreateStore = compose(
+    applyMiddleware(promise),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )(createStore);
 
-//create an object for the default data
-const defaultState = {
+  const store = finalCreateStore(reducer, initialState);
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+      const nextReducer = require('../reducers');
+      store.replaceReducer(nextReducer);
+    });
+  }
+
+  return store;
 }
-
-const enhancers = compose(
-	applyMiddleware(promise),
-	window.devToolsExtension ? window.devToolsExtension() : f => f
-);
-const store = createStore(rootReducer, defaultState, enhancers);
-export const history = syncHistoryWithStore(browserHistory, store);
-
-if(module.hot) {
-	module.hot.accept('../reducers/', () => {
-		const nextRootReducer = require('../reducers/index').default;
-		store.replaceReducer(nextRootReducer);
-	});
-}
-export default store;

@@ -1,14 +1,17 @@
-FROM ruby:2.3.1
+FROM node:4-onbuild
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && apt-get install -y git-core curl build-essential openssl libssl-dev
 
-RUN gem install bundle
+RUN mkdir -p /usr/src/ymm_mobile_ui
 
-RUN mkdir /ymm_mobile
+WORKDIR /usr/src/ymm_mobile_ui
 
-WORKDIR /ymm_mobile
+COPY package.json /usr/src/ymm_mobile_ui
 
+RUN npm install
 
-RUN bundle install
+ADD . /usr/src/ymm_mobile_ui
 
-ADD . /ymm_mobile
+EXPOSE 8088
+
+CMD ["npm", "start"]

@@ -1,5 +1,5 @@
 {
-  "name": "ymeetme-mobile-site",
+  "name": "ymm_mobile_ui",
   "version": "1.0.0",
   "description": "Officially souce code for ymmeetme mobile site ",
   "scripts": {
@@ -15,8 +15,8 @@
     "url": "#"
   },
   "author": "duong@mmj.vn",
-  "license": "MMJ",
-  "homepage": "http://mmj.vn",
+  "license": "MIT",
+  "homepage": "http://ymeet.me",
   "dependencies": {
     "axios": "^0.12.0",
     "babel-core": "^6.7.7",
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
     "eslint": "^2.13.1",
     "eslint-plugin-react": "^5.2.2",
     "expect": "^1.18.0",

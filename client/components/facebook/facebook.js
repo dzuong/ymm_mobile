@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import styles from '../../styles/facebook.scss';
+import styles from '../../../public/styles/facebook.scss';
 
 class FacebookLogin extends React.Component {
 
@@ -70,7 +70,7 @@ class FacebookLogin extends React.Component {
     window.FB.api('/me', { fields: this.props.fields }, (me) => {
       Object.assign(me, authResponse);
       this.props.callback(me);
-      this.props.facebookLogin('authenticated');
+      // this.props.facebookLogin('authenticated');
     });
   };
 
@@ -97,36 +97,12 @@ class FacebookLogin extends React.Component {
   renderWithFontAwesome() {
     const { cssClass, size, icon, textButton } = this.props;
     return (
-      <span>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-        <button
-          className={`${cssClass} ${size}`}
-          onClick={this.click}
-        >
-          <i className={`fa ${icon}`}></i> {textButton}
-        </button>
-        <style dangerouslySetInnerHTML={{ __html: styles }}></style>
-      </span>
+      <p><a className="btn btn-lg btn-success" href="#" onClick={this.click}><i className="fa fa-facebook-square"></i> Facebook login</a></p>
     );
   }
 
   render() {
-    const { cssClass, size, icon, textButton } = this.props;
-    if (icon) {
-      return this.renderWithFontAwesome();
-    }
-
-    return (
-      <span>
-        <button
-          className={`${cssClass} ${size}`}
-          onClick={this.click}
-        >
-          {textButton}
-        </button>
-        <style dangerouslySetInnerHTML={{ __html: styles }}></style>
-      </span>
-    );
+    return this.renderWithFontAwesome();
   }
 }
 
